@@ -330,3 +330,248 @@ yearsUntilRetirement(1948, 'Mike');
 yearsUntilRetirement(1969, 'Jane');
 */
 
+
+/*****************************
+ * Functions Statements and Expressions
+ */
+
+// Function declaration
+//   function whatDoYouDo() {}
+/*
+// Function expression
+var whatDoYouDO = function(job, firstName) {
+  switch (job) {
+    case 'teacher':
+      return firstName + ' teaches kids how to code';
+    case 'driver':
+      return firstName + ' drives a cab in Lisbon';
+    case 'designer':
+      return firstName + ' designs beautiful websites';
+    default:
+      return firstName + ' does something else';
+  }
+};
+
+console.log(whatDoYouDO('teacher', 'John'));
+console.log(whatDoYouDO('driver', 'Jane'));
+console.log(whatDoYouDO('retired', 'Mark'));
+*/
+
+
+/*****************************
+ * Arrays
+ */
+/*
+var names = ['John', 'Mark', 'Jane'];
+var years = new Array(1990, 1969, 1948);
+
+console.log(names[0]);
+
+// Mutate array data
+names[1] = 'Ben';
+names[5] = 'Mary';
+console.log(names);
+
+// Different data types
+var john = ['John', 'Smith', 1998, 'designer', false];
+
+john.push('blue');
+john.unshift('Mr.');
+console.log(john);
+
+john.pop();
+john.pop();
+john.shift();
+console.log(john);
+
+console.log(john.indexOf(1998));
+
+var isDesigner = john.indexOf('designer') === -1? 'John id NOT a designer' : 'John IS a designer';
+console.log(isDesigner);
+*/
+
+
+/*****************************
+ * CODING CHALLENGE 3
+ */
+/*
+function tipCalculator(bill) {
+  var percentage;
+  if (bill < 50) {
+    percentage = .2;
+  } else if(bill >= 50 && bill < 200) {
+    percentage = .15;
+  } else {
+    percentage = .1;
+  }
+  return percentage * bill;
+}
+console.log(tipCalculator(10));
+
+var bills = [124, 48, 268];
+var tips = [tipCalculator(bills[0]), tipCalculator(bills[1]), tipCalculator(bills[2])];
+var finalValues = [bills[0] * tips[0],
+                   bills[1] * tips[1],
+                   bills[2] * tips[2]];
+console.log(tips, finalValues);
+*/
+
+
+/*****************************
+ * Objects and properties
+ */
+/*
+var john = {
+  firstName: 'John',
+  lastName: 'Smith',
+  birthYear: 1998,
+  family: ['Jane', 'Mark', 'Bob', 'Emily'],
+  job: 'teacher',
+  isMarried: false
+};
+console.log(john.firstName);
+console.log(john['fistName']);
+var x = 'birthYear';
+console.log(john[x]);
+
+john.job = 'designer';
+john['isMarried'] = true;
+console.log(john);
+
+// new Object
+var jane = new Object();
+jane.name = 'Jane';
+jane.birthYear = 1969;
+jane['lastName'] = 'Smith';
+console.log(jane);
+*/
+
+
+/*****************************
+ * Objects and methods
+ */
+/*
+var john = {
+  firstName: 'John',
+  lastName: 'Smith',
+  birthYear: 1998,
+  family: ['Jane', 'Mark', 'Bob', 'Emily'],
+  job: 'teacher',
+  isMarried: false,
+  calcAge: function () {
+    this.age = 2018 - this.birthYear;
+  }
+};
+
+john.calcAge();
+console.log(john.age);
+*/
+
+
+/*****************************
+ * CODING CHALLENGE 4
+ */
+
+/*
+var john = {
+  fullName: 'John Smith',
+  mass: 92,
+  height: 1.95,
+  calcBMI: function () {
+    this.bmi = this.mass / (this.height + this.height);
+    return this.bmi;
+  }
+};
+
+var mark = {
+  fullName: 'Mark Miller',
+  mass: 78,
+  height: 1.69,
+  calcBMI: function () {
+    this.bmi = this.mass / (this.height + this.height);
+    return this.bmi;
+  }
+};
+
+john.calcBMI();
+mark.calcBMI();
+console.log(john, mark);
+
+if (john.bmi > mark.bmi) {
+  console.log(john.fullName + ' has a higher BMI of ' + john.bmi);
+} else if(mark.bmi > john.bmi) {
+  console.log(mark.fullName + ' has a higher BMI of ' + mark.bmi);
+} else {
+  console.log('They have the same BMI');
+}
+*/
+
+
+/*****************************
+ * Loops and iteration
+ */
+
+/*
+for (var i = 0; i < 10; i++) {
+  console.log(i);
+}
+
+// i = 0, 0 < 10 true, log i to console, i++
+// i = 1, 1 < 10 true, log i to the console, i++
+//...
+// i = 10, 10 < 10 FALSE, log i to the console, i++
+
+var john = ['John', 'Smith', 1990, 'designer', false];
+for (var i = 0; i < john.length; i++) {
+  console.log(john[i]);
+}
+
+// While loop
+var i = 0;
+while (i < john.length) {
+  console.log(john[i]);
+  i++;
+}
+
+// continue and break statements
+var john = ['John', 'Smith', 1990, 'designer', false, 'blue'];
+for (var i = 0; i < john.length; i++) {
+  if (typeof john[i] !== 'string') continue;
+  console.log(john[i]);
+}
+
+// Looping backwards
+for (var i = john.length - 1; i >= 0; i--) {
+  console.log(john[i]);
+}
+*/
+
+
+/*****************************
+ * CODING CHALLENGE 5
+ */
+
+var john = {
+  fullName: 'John Smith',
+  bills: [124, 48, 268, 188, 42],
+  calcTips: function () {
+    this.tips  = [];
+    this.finalValues = [];
+
+    for (var i = 0; i < this.bills.length; i++) {
+      //  Determine percentage based on tipping rules
+      var percentage;
+
+      if (this.bills[i] < 50) {
+        percentage = .2;
+      } else if (this.bills[i] >= 50 && this.bills[i] < 200) {
+        percentage = .15;
+      } else {
+        percentage = .1;
+      }
+
+    //   Add results to the corresponing arrays
+    }
+  }
+};
+
