@@ -551,16 +551,17 @@ for (var i = john.length - 1; i >= 0; i--) {
  * CODING CHALLENGE 5
  */
 
+/*
 var john = {
   fullName: 'John Smith',
   bills: [124, 48, 268, 188, 42],
   calcTips: function () {
-    this.tips  = [];
-    this.finalValues = [];
+    this.tips  = this.finalValues = [];
 
     for (var i = 0; i < this.bills.length; i++) {
       //  Determine percentage based on tipping rules
       var percentage;
+      var bill = this.bills[i];
 
       if (this.bills[i] < 50) {
         percentage = .2;
@@ -570,8 +571,62 @@ var john = {
         percentage = .1;
       }
 
-    //   Add results to the corresponing arrays
+    //   Add results to the corresponding arrays
+      this.tips[i] = bill * percentage;
+      this.finalValues[i] = bill * bill * percentage;
     }
   }
 };
+
+var mark = {
+  fullName: 'Mark Miller',
+  bills: [77, 475, 118, 45],
+  calcTips: function () {
+    this.tips  = this.finalValues = [];
+
+    for (var i = 0; i < this.bills.length; i++) {
+      //  Determine percentage based on tipping rules
+      var percentage;
+      var bill = this.bills[i];
+
+      if (this.bills[i] < 100) {
+        percentage = .2;
+      } else if (this.bills[i] >= 100 && this.bills[i] < 300) {
+        percentage = .1;
+      } else {
+        percentage = .25;
+      }
+
+      //   Add results to the corresponding arrays
+      this.tips[i] = bill * percentage;
+      this.finalValues[i] = bill * bill * percentage;
+    }
+  }
+};
+
+function calcAverage(tips) {
+  var sum = 0;
+  for (var i = 0; i < tips.length; i++) {
+    sum = sum + tips[i];
+  }
+  return sum / tips.length;
+}
+
+// Do the calculations
+john.calcTips();
+mark.calcTips();
+
+john.average = calcAverage(john.tips);
+mark.average = calcAverage(mark.tips);
+console.log(john, mark);
+
+if (john.average > mark.average) {
+  console.log(john.fullName + '\'s family pays higher tips, with an average of $' + john.average);
+} else if(mark.average > john.average) {
+  console.log(mark.fullName + '\'s family pays higher tips, with an average of $' + mark.average);
+}
+*/
+
+
+
 
