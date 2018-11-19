@@ -188,3 +188,216 @@ game();
 })(5);
 */
 
+
+// Lecture: Closures
+/*
+function retirement(retirementAge) {
+  var a = ' years left util retirement.';
+  return function (yearOfBirth) {
+    var age = 2018 - yearOfBirth;
+    console.log((retirementAge - age) + a)
+  }
+}
+
+var retirementUS = retirement(66);
+var retirementGermany = retirement(65);
+var retirementIceLand = retirement(67);
+
+retirementUS(1990);
+retirementGermany(1990);
+retirementIceLand(1990);
+
+// retirement(66)(1990);
+
+function interviewQuestion(job) {
+  return function (name) {
+    if (job === 'designer') {
+      console.log(name + ' designer');
+    } else if (job === 'teacher') {
+      console.log(name + ' teacher');
+    } else {
+      console.log(name + ' other');
+    }
+  }
+}
+
+interviewQuestion('teacher')('John');
+*/
+
+
+// Lecture: Bind, call and apply
+/*
+var john = {
+  name: 'John',
+  age: 26,
+  job: 'teacher',
+  presentation: function (style, timeOfDay) {
+    if (style === 'formal') {
+      console.log('Good ' + timeOfDay + ', Ladies and gentlemen! I\'m ' + this.name + ', I\'m a ' + this.job);
+    } else if (style === 'friendly') {
+      console.log('Hey! What\'s up? I\'m ' + this.name + ', I\'m a ' + this.job + '. Have a nice ' + timeOfDay);
+    }
+  }
+};
+
+var emely = {
+  name: 'Emily',
+  age: 35,
+  job: 'designer'
+};
+
+john.presentation('formal', 'morning');
+
+john.presentation.call(emely, 'friendly', 'afternoon');
+
+john.presentation.apply(emely, ['formal', 'afternoon']);
+
+var johnFriendly = john.presentation.bind(john, 'friendly');
+
+johnFriendly('morning');
+johnFriendly('night');
+
+var emelyFormal = john.presentation.bind(emely, 'formal');
+emelyFormal('morning');
+
+function isFullAge(limit, el) {
+  return el >= limit;
+}
+
+var isFullAgeJapan = isFullAge.bind(this, 20);
+console.log(isFullAgeJapan(18));
+console.log(isFullAgeJapan(22));
+*/
+
+
+// CODING CHALLENGE
+/*
+(function () {
+  function Question(question, answers, correct) {
+    this.question = question;
+    this.answers = answers;
+    this.correct = correct;
+  }
+
+  Question.prototype.displayQuestion = function () {
+    console.log(this.question);
+
+    for (var i = 0; i < this.answers.length; i++) {
+      console.log(i + ': ', this.answers[i]);
+    }
+  };
+
+  Question.prototype.cheackAnswer = function (ans) {
+    if (ans === this.correct) {
+      console.log('Correct answer!');
+    } else {
+      console.log('Other answer');
+    }
+  };
+
+  var q1 = new Question(
+    'Is JabaScript the coolest programming language in the world?',
+    ['Yes', 'No'],
+    0);
+
+  var q2 = new Question(
+    'What is the name of this course\'s teacher?',
+    ['John', 'Michael', 'Jonas'],
+    2);
+
+  var q3 = new Question(
+    'What dous best describe coding?',
+    ['Boring', 'Hard', 'Fun', 'Tediuos'],
+    2);
+
+  var questions = [q1, q2, q3];
+
+  var n = Math.floor(Math.random() * questions.length);
+
+  questions[n].displayQuestion();
+
+  var answer = parseInt(prompt('Please select the correct answer.'));
+
+  questions[n].cheackAnswer(answer);
+})();
+*/
+
+(function () {
+  function Question(question, answers, correct) {
+    this.question = question;
+    this.answers = answers;
+    this.correct = correct;
+  }
+
+  Question.prototype.displayQuestion = function () {
+    console.log(this.question);
+
+    for (var i = 0; i < this.answers.length; i++) {
+      console.log(i + ': ', this.answers[i]);
+    }
+  };
+
+  Question.prototype.cheackAnswer = function (ans, callback) {
+    var sc;
+
+    if (ans === this.correct) {
+      console.log('Correct answer!');
+      sc = callback(true);
+    } else {
+      console.log('Other answer');
+
+      sc = callback(false);
+    }
+
+    this.displayScore(sc);
+  };
+
+  Question.prototype.displayScore = function (score) {
+    console.log('Your current score is: ' + score);
+    console.log('--------------------------------');
+  };
+
+  var q1 = new Question(
+    'Is JabaScript the coolest programming language in the world?',
+    ['Yes', 'No'],
+    0);
+
+  var q2 = new Question(
+    'What is the name of this course\'s teacher?',
+    ['John', 'Michael', 'Jonas'],
+    2);
+
+  var q3 = new Question(
+    'What dous best describe coding?',
+    ['Boring', 'Hard', 'Fun', 'Tediuos'],
+    2);
+
+  var questions = [q1, q2, q3];
+
+  function score() {
+    var sc = 0;
+    return function (correct) {
+      if (correct) {
+        sc++;
+      }
+      return sc;
+    }
+  }
+  var keepScore = score();
+
+  function nextQuestion() {
+    var n = Math.floor(Math.random() * questions.length);
+
+    questions[n].displayQuestion();
+
+    var answer = prompt('Please select the correct answer.');
+
+    if (answer !== 'exit') {
+      questions[n].cheackAnswer(parseInt(answer), keepScore);
+
+      nextQuestion();
+    }
+  }
+
+  nextQuestion();
+})();
