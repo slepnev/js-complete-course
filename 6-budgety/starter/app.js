@@ -14,7 +14,7 @@ var UIController = (function () {
     inputDescription: '.add__description',
     inputValue: '.add__value',
     inputBtn: '.add__btn',
-
+    budget: '.budget__value',
   };
 
   return {
