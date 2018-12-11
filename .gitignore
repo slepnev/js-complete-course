@@ -7,3 +7,4 @@
 /node_modules
 /.idea/
 .idea/workspace.xml
+/9-forkify/starter/node_modules/
