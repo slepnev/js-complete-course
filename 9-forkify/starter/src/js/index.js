@@ -1,5 +1,8 @@
-// Global app controller
-import num from './test'
+import { proxy, key } from "./config";
+import axios from 'axios';
 
-console.log(`I importer ${num} from another module!`);
-
+async function getResults(query) {
+  const res = await axios(`/api/searh?key=${key}&q=${query}`);
+  console.log(res);
+}
+getResults('123');
