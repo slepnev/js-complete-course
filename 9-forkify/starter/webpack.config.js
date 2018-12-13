@@ -12,7 +12,7 @@ module.exports = {
     contentBase: './dist',
     proxy: {
       '/api': {
-        target: 'http://food2fork.com',
+        target: 'https://www.food2fork.com',
         secure: true,
         changeOrigin: true
       }
