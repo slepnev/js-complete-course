@@ -11,6 +11,15 @@ export const clearResults = () => {
   elements.searchResPages.innerHTML = '';
 };
 
+export const highlightSelected = id => {
+  const resultsArr = Array.from(document.querySelectorAll('.likes__link'));
+  resultsArr.forEach(el => {
+    el.classList.remove('results__link--active');
+  });
+
+  document.querySelector(`a[href='#${id}']`).classList.add('results__link--active');
+};
+
 /* Pasta with tomato and spinach
 * acc: 0 / acc + cur.length = 5 / newTitle = ['Pasta']
 * acc: 5 / acc + cur.length = 9 / newTitle = ['Pasta', 'with']
@@ -67,7 +76,7 @@ const createButton = (page, type) => `
 const renderButtons = (page, numResults, resPerPage) => {
   const pages = Math.ceil(numResults / resPerPage);
 
-  let button;
+  let button = '';
   if (page === 1 && pages > 1) {
     // Only button to go to next page
     button = createButton(page, 'next');
