@@ -1,10 +1,9 @@
 import Search from './models/Search';
+import Recipe from './models/Recipe';
+import List from './models/List';
 import * as searchView from './views/searchView';
 import * as recipeView from './views/recipeView';
 import { clearLoader, elements, renderLoader } from './views/base';
-import Recipe from './models/Recipe';
-
-Recipe
 
 /* Global state
 * - Search
@@ -107,10 +106,15 @@ const controlRecipe = async () => {
 elements.recipe.addEventListener('click', e => {
   if (e.target.matches('.btn-decrease, .btn-decrease *')) {
     // Decrease button is click
-    state.recipe.updateServings('dec');
+    if (state.recipe.servings > 1) {
+      state.recipe.updateServings('dec');
+      recipeView.updateServingsIngredients(state.recipe);
+    }
   } else if (e.target.matches('.btn-increase, .btn-increase *')) {
     // Increase button is click
     state.recipe.updateServings('inc');
+    recipeView.updateServingsIngredients(state.recipe);
   }
-  console.log(state.recipe);
 });
+
+window.l = new List();
